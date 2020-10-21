@@ -36,11 +36,6 @@ end lut_oscilator;
 
 architecture Behavioral of lut_oscilator is
 
---	signal lut_vector : std_logic_vector (C_NUM_LUT downto 0) := (others=>'0');
-	
---	attribute keep : string;
---	attribute keep of lut_vector : signal is "true";
-
 	signal sig_osc	:	STD_LOGIC;
 	attribute keep : string;
 	attribute keep of sig_osc : signal is "true";
@@ -57,9 +52,6 @@ architecture Behavioral of lut_oscilator is
         
 begin
 
---	oscillator : for bit_index in 0 to C_NUM_LUT - 1 generate
-		
---	begin
 	lut_inst : LUT6
 	generic map (INIT => X"4444444444444444") -- Specify LUT Contents
 	port map ( 	I0 => sig_osc, 
@@ -71,10 +63,6 @@ begin
 					O =>  sig_osc);
 					
 	Q <= sig_osc;
---	end generate oscillator;
-	
---	lut_vector(0) <= lut_vector(C_NUM_LUT);
---	x_out <= lut_vector(C_NUM_LUT);
 
 end Behavioral;
 

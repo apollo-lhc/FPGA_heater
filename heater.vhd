@@ -1,12 +1,15 @@
+-------------------------------------------------------------------------------
+-- Adjustable LUT Oscilator Heater
+-- Rui Zou (rz393@cornell.edu), Markus Happe, Christian Plessl
+-- Each bit in adjust_heaters enables C_NUM_LUTS/32 number of lutosc, can
+-- enable up to C_NUM_LUTS lutosc
+---------------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
 use IEEE.numeric_std.ALL;
-
---library proc_common_v3_00_a;
---use proc_common_v3_00_a.proc_common_pkg.all;
 
 library unisim;
 use UNISIM.VComponents.all;
@@ -60,11 +63,8 @@ architecture IMP of heater is
   
 begin
 
---  N_heaters <= conv_integer(adjust_heaters);
   init_proc : process( adjust_heaters, enable_heater ) is
   begin
-  --enable_vector (N_heaters-1 downto 0) <= (others => '1');
-  --enable_vector (C_NUM_LUTS-1 downto N_heaters) <= (others => '0');
     for i in 0 to 31 loop
       for j in 0 to block_items - 1 loop
         enable_vector(block_items * i + j) <= adjust_heaters(i) and enable_heater;
