@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 -- Company: 
--- Engineer: 
+-- Engineer: Markus Happe, Christian Plessl 
 -- 
 -- Create Date:    12:49:15 04/24/2012 
 -- Design Name: 

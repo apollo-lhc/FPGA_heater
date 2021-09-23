@@ -1,8 +1,11 @@
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
 -- Adjustable LUT Oscilator Heater
 -- Rui Zou (rz393@cornell.edu), Markus Happe, Christian Plessl
--- Each bit in adjust_heaters enables C_NUM_LUTS/32 number of lutosc, can
--- enable up to C_NUM_LUTS lutosc
+-- Each bit in adjust_heaters enables C_NUM_LUTS/32 number of lutoscs, can enable up
+-- to C_NUM_LUTS lutoscs
+-- We highly recommend all users to spread lutoscs out over the FPGA in floor planning and
+-- enable the sysmons in all SLRs to prevent large temperature gradients across
+-- the FGPA dies
 ---------------------------------------------------------------------------------------
 
 library ieee;
@@ -72,16 +75,12 @@ begin
     end loop;
   end process init_proc;
 
-
   luts : for bit_index in 0 to C_NUM_LUTS - 1 generate
   begin
-    
     lut_osc : entity work.lut_oscilator
       port map (	en 	=> enable_vector(bit_index),
                         Q       => inout_vector(bit_index));
-		
   end generate luts;
-
   
   offset <= conv_integer(read_which_heater);
 
